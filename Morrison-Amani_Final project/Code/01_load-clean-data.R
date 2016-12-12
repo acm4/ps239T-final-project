@@ -1,13 +1,14 @@
-##Load and Clean Data
-# This script walks through loading and cleaning data into 
-# an analysis dataset. 
+## Load and Clean Data ##
 
-# Data was collected on ProQuest database (not scrapeable) 
-# using targeted search term and filters and exported as xls files, 
-# then converted to csvs. Each file contains 100 observatations.
+# This script walks through loading and cleaning data into an analysis dataset. 
+
+# Data was collected on ProQuest Historical Newspapers database (not scrapeable) using targeted 
+# search term "kitchenette" and filters for year range and document type.
+# Then exported as xls files and converted to csvs. Each file contains 100 observatations.
 
 #Import package
 library(dplyr)
+
 
 #Import data set as dataframe and merge csv files into one
 # file_list <- list.files(path = ("C:/Users/Amani/Desktop/ps239T-final-project/Morrison-Amani_Final project/Data/kitchenette1_proquest.csv", 
