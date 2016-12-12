@@ -30,7 +30,8 @@ titles <- stripWhitespace(titles)
 # titles2 <- tolower(titles2)
 # titles2 <- removeWords(titles2, stopwords("english"))
 # titles2 <- stripWhitespace(titles2)
-##realized I could just use the first value and input that into the wordcloud function; was thinking I needed to do a lot of converting and organizing data that was actually unnecessary. Wasted a few hours on this, but figured it out.
+    ##Realized I could just use the first value and input that into the wordcloud function; 
+    ##was thinking I needed to do a lot of converting and organizing data that was actually unnecessary. 
 
 #Create wordcloud for overall term frequency
 wordcloud(titles, scale=c(5,0.5), max.words=100,
@@ -42,12 +43,12 @@ wordcloud(titles, scale=c(5,0.5), max.words=100,
           random.order=FALSE, rot.per=0, use.r.layout=FALSE, 
           colors = brewer.pal(6, "Set1"))
 
-#View more words in cloud by reducing largest size in scale
+#View more words in cloud by reducing largest size in scale -- FIG1_wordcloud_natl-titles in Results directory
 wordcloud(titles, scale=c(4,0.5), max.words=100,
           random.order=FALSE, rot.per=0, use.r.layout=FALSE, 
           colors = brewer.pal(6, "Set1"))
 
-#Get clearer sense of frequent words by increasing minimum frequency
+#Get clearer sense of frequent words by increasing minimum frequency -- FIG2_wordcloud-natl-titles in Results directory
 wordcloud(titles, scale=c(4,0.5), max.words=100, min.freq = 5,
           random.order=FALSE, rot.per=0, use.r.layout=FALSE, 
           colors = brewer.pal(6, "Set1"))
@@ -59,8 +60,8 @@ wordcloud(titles, scale=c(4,0.5), max.words=100, min.freq = 5,
 
 str(finalunique_df$uniquedocs_df.Abstract) ##291 levels
 summary(finalunique_df$uniquedocs_df.Abstract)
-## !is.na(finalunique_df$uniquedocs_df.Abstract) ##yields all TRUE, which is incorrect-- wrong function to count missing values?
-## sum(!is.na(finalunique_df$uniquedocs_df.Abstract)) ##yields 453, which is incorrect, as some rows are blank in this column
+# !is.na(finalunique_df$uniquedocs_df.Abstract)   ##yields all TRUE, which is incorrect-- wrong function to count missing values?
+# sum(!is.na(finalunique_df$uniquedocs_df.Abstract))   ##yields 453, which is incorrect, as some rows are blank in this column
 
 #Pre-process data
 abstracts <- removePunctuation(as.character(finalunique_df$uniquedocs_df.Abstract), 
@@ -74,7 +75,7 @@ abstracts
 #Stemmed data
 # abstractsstem <- stemDocument(abstracts, language = "porter")
 # abstractsstem
-## Only stems last word in each abstract rather than all words; tried other functions but got error msgs
+    ## Only stems last word in each abstract rather than all words; tried other functions but got error msgs
 
 #Create wordcloud
 wordcloud(abstracts, scale=c(4,0.5), max.words=100,
@@ -82,6 +83,7 @@ wordcloud(abstracts, scale=c(4,0.5), max.words=100,
           colors = brewer.pal(8, "Set1"))
 
 #Create wordcloud removing "kitchenette" and "apartment" and others to visualize less-expected associated words
+## FIG3_wordcloud_abstracts2 in Results directory
 abstracts2 <- removeWords(abstracts, c("kitchenette", "kitchenettes", "apartment", 
                                        "apartments", "week", "story", "last",
                                        "said", "say", "just", "ave"))
@@ -89,7 +91,7 @@ abstracts2 <- stripWhitespace(abstracts2)
 wordcloud(abstracts2, scale=c(3.8,0.5), max.words=100, min.freq = 4,
           random.order=FALSE, rot.per=0, use.r.layout=T, 
           colors = brewer.pal(8, "Set1"))  ##use.r.layout=T seems to visualize more words
-##Not particularly informative
+    ##Not particularly informative
 
 
 #######
@@ -99,7 +101,7 @@ wordcloud(abstracts2, scale=c(3.8,0.5), max.words=100, min.freq = 4,
 ## Create data frame with article counts by city
 freq_df <- data.frame(table(finalunique_df$uniquedocs_df.placeOfPublication)) 
 
-## Visualize data in barplot because categorical
+## Visualize data in barplot because categorical --- FIG4_bar_natlfreq-bycity in Results directory
 par(mfrow=c(1.2, 1), mar=c(9, 4.5, 3, 4)) ##plot parameters
 barplot(freq_df$Freq, ylab = "Total Number", 
         main = "Kitchenette Newspaper Articles by City, 1940-59", 
@@ -142,7 +144,7 @@ freqbypub_df$Var1[6] <- "Washington Post"
 freqbypub_df$Var1[7] <- "Wash. Post & Times Herald"
 ##success!
 
-#Visualize data
+#Visualize data --- FIG5_bar_natlfreq-bypub in Results directory
 par(mfrow=c(1, 1), mar=c(4.5, 11, 4, 7))  
 barplot(freqbypub_df$Freq, names.arg = freqbypub_df$Var1, 
         main = "Kitchenette Articles by Publication, 1940-59", 
@@ -158,7 +160,7 @@ barplot(freqbypub_df$Freq, names.arg = freqbypub_df$Var1,
 freqyr_df <- data.frame(table(finalunique_df$uniquedocs_df.year))
 freqyr_df
 
-##Visualize data with line plot
+##Visualize data with line plot  --- FIG6_line_natlfreq-chgtime.png in Results directory
 timeplot <- ggplot(freqyr_df, aes(Var1, Freq, show.legend = FALSE, group = 1)) + 
   geom_point(colour = "blue") +  geom_line(colour = "blue", size = 3) + 
   +   ggtitle("Kitchenette Newspaper Articles by Year, 1940-59") +
@@ -180,7 +182,7 @@ timeplot
 #   theme(axis.title = element_text(family = "sans serif", color="#666666", face="bold", size=16))
   ##Not useful visualization because does not accurately represent the number of articles for each publication
 
-## Plot with lines to visualize contrasting yearly outputs of publications
+## Plot with lines to visualize contrasting yearly outputs of publications -- FIG7_multline_yrlyoutput in Results directory
 lines <- ggplot(freqyr2_df, aes(Var2, Freq, group = Var1, colour = Var1)) + geom_line(size = 2) + 
   ggtitle("Yearly Output of Kitchenette Articles by Newspaper, 1940-59") +
   labs(x="Year",y="Total Number") + theme(legend.title = element_blank()) +
@@ -196,9 +198,9 @@ lines
 #   theme(plot.title = element_text(color="#666666", face="bold", size=20, hjust=0)) +
 #   theme(axis.title = element_text(color="#666666", face="bold", size=16))
 # lines2
-## Legend is messy and doesn't use shapes when plotting, not sure why
+    ## Legend is messy and doesn't use shapes when plotting, not sure why
 
-##Include points and lines to show discrete amounts along line (remove shapes)
+##Include points and lines to show discrete amounts along line (remove shapes) --- FIG8_multline-point_yrlyoutput in Results directory
 lines2 <- ggplot(freqyr2_df, aes(Var2, Freq, group = Var1, colour = Var1)) + geom_line(size = 2) + 
   geom_point(aes(colour = factor(Var1), size = 2)) +
   ggtitle("Yearly Output of Kitchenette Articles by Newspaper, 1940-59") +

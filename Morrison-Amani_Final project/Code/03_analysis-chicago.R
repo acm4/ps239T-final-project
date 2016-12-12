@@ -45,7 +45,8 @@ chititles <- removeWords(chititles, stopwords(kind = "en"))
 chititles <- stripWhitespace(chititles)
 
 
-#Create wordcloud for inital visualization (for comparison with national results)
+#Create wordcloud for inital visualization (for comparison with national results) 
+## FIG9_wordcloud_chi in Results directory
 wordcloud(chititles, scale=c(3.8,0.5), max.words=100, 
           random.order=FALSE, rot.per=0, use.r.layout=T, 
           colors = brewer.pal(8, "Set1"))
@@ -73,12 +74,12 @@ tribsent <- sentiment(text.var = tribune_df$finalunique_df.uniquedocs_df.Title,
 tribsent
 
 #Plot aggregate Tribune sentiment
-plot(tribsent)
+plot(tribsent)  ## FIG9_line_trib-polarity in Results directory
   ##Has built in xlab = "Duration" (by percentage) and ylab = "Emotional Valence" (from -20 to 35)
   ##Not sure how to decipher plot, and documentation isn't clear; not particularly useful for me because can't understand
   ##Duration = across the total number of years (1940-1959)??
 
-#Plot using other barplots
+#Plot using barplot --- FIG11_bar_trib-polarity in Results directory
 barplot(tribsent$sentiment)
 bar_tribsent <- ggplot(tribsent, aes(element_id, sentiment, show.legend = FALSE, fill = "")) + geom_col() + 
   ggtitle("Chicago Tribune Sentiment Scores") +
@@ -127,13 +128,13 @@ highlight(with(subset(tribune_df2, rownumber %in% sample(unique(rownumber), 3)),
 
 # Highlight by polarity of specified sample (looked in tribsent2 df for polarity scores)
 
-#Negative polarity
+#Negative polarity  --- FIG12_highlight_trib-negsent in Results directory
   highlight(with(subset(tribune_df2, rownumber == c(73, 14)), 
                sentiment_by(finalunique_df.uniquedocs_df.Title, rownumber)))
     ##Opens visualization in a browser window. Works but a bit buggy; won't return more than two 
     ##results, even if multiple rownumbers, and won't return pos and neg in same call
 
-#Positive polarity
+#Positive polarity  --- FIG13_highlight_trib-possent in Results directory
   highlight(with(subset(tribune_df2, rownumber == c(115, 24)), 
                sentiment_by(finalunique_df.uniquedocs_df.Title, rownumber)))
 
@@ -146,7 +147,7 @@ defendersent <- sentiment(text.var = defender_df$finalunique_df.uniquedocs_df.Ti
                           polarity_dt = polarity_table)
 defendersent
 
-#Visualize Defender sentiment
+#Visualize Defender sentiment  --- FIG14_bar_def-polarity in Results Directory
 bar_defendersent <- ggplot(defendersent, aes(element_id, sentiment, show.legend = FALSE, fill = "")) + geom_col() + 
   ggtitle("Chicago Defender Sentiment Scores") +
   labs(x="Article ID (Num > as Year >)",y="Sentiment/Polarity Score") + 
@@ -171,7 +172,7 @@ defender_df2$rownumber <- 1:nrow(defender_df2)
 
 #Highlight Defender sentiments
   
-#random sample
+#random sample  ---- FIG15_highlight_defender-posneg in Results directory
   highlight(with(subset(defender_df2, rownumber %in% sample(unique(rownumber), 5)), 
                sentiment_by(finalunique_df.uniquedocs_df.Title, rownumber)))
     ##Worked better than with Tribune--returned both pos and neg in same call; 

@@ -1,10 +1,13 @@
-##Description:
+Description:
+
 This project analyzes data from a targeted search in the ProQuest 
 Historical Newspapers database. The project performs analyses to 
 ascertain newspaper article frequency, term frequency, change over 
 time, and article sentiment/polarity.
 
-#Note on Data Collection
+
+Note on Data Collection
+
 The ProQuest search was performed with the following search parameters:
   - search term: kitchenette
    - filter by:
@@ -22,13 +25,14 @@ The ProQuest search was performed with the following search parameters:
   - Sorted by: Relevance (default)
  First 500 results selected to export for analysis.
 
-##Dependencies:
+
+Dependencies:
   1. RStudio, Version 0.99.903
 
 
-##Files:
+Files:
 
- #Data
+ Data
     1. kitchenette1_proquest.csv: ProQuest dataset (results 1-100)
     2. kitchenette2_proquest.csv: ProQuest dataset (results 101-200)
     3. ktichenette3_proquest.csv: ProQuest dataset (results 201-300)
@@ -45,7 +49,7 @@ The ProQuest search was performed with the following search parameters:
 	  - pubtitle: Newspaper title
 	  - year: Year of article publication
 
-  #Code
+ Code
     1. 01_load-clean-data.R: Loads, merges, and cleans data in 5 raw 
 	ProQuest datasets into Analysis Dataset.
     2. 02_analysis-national.R: Conducts analysis of all data 
@@ -55,5 +59,90 @@ The ProQuest search was performed with the following search parameters:
 	newspapers only, the results of which appear in the Results 
 	directory.
 
-  #Results
-    1. 
+ Results
+  
+  National (All) Newspapers 
+    1. FIG1_wordcloud-natltitles.png: Wordcloud visualizing term 
+	frequency of article titles in all newspapers.
+    2. FIG2_wordcloud-natltitles.png: Wordcloud visualizing term 
+	frequency of article titles in all newspapers, with a minimum 
+	frequency parameter of 5.
+    3. FIG3_wordcloud_abstracts2.png: Wordcloud visualizing term 
+	frequency of article abstracts in all newspapers, with more 
+	obvious terms removed (e.g., "kitchenette", "apartment") to 
+	yield insight into other words used in these article excerpts.
+    4. FIG4_bar_natlfreq-bycity.png: Barplot graphing the total 
+	number of articles (yielded by "kitchenette" search) by publication 
+	city.
+    5. FIG5_bar_natlfreq-bypub.png: Barplot graphing the total number 
+	of articles by publication title.
+    6. FIG6_line_natlfreq-chgtime.png: Lineplot graphing the change over 
+	time of article publication by all newspapers, taken 
+	collectively.
+    7. FIG7_multline_yrlyoutput.png: Lineplot graphing the change over 
+	time of article publication by all newspapers, taken 
+	individually.
+    8. FIG8_multline-point_yrlyoutput.png: Adds points to FIG7 lineplot 
+	to make tracking of individual newspaper data more effective.
+
+  Chicago Newspapers
+    9. FIG9_wordcloud_chi.png: Wordcloud visualizing term frequency in 
+	article titles in Chicago newspapers (Chicago Tribune, Chicago 
+	Defender, Daily Defender).
+    10. FIG10_line_trib-polarity.png: Lineplot graphing the change in 
+	emotional valence of Chicago Tribune articles over the duration 
+	of the article publications. (An unclear measurement.)
+    11. FIG11_bar_trib-polarity.png: Barplot graphing sentiment/polarity 
+	score of Chicago Tribune article titles.
+    12. FIG12_highlight_trib-negsent.png: Visualizes sentiment polarity 
+	of Chicago Tribune article titles by yielding article title 
+	number, polarity score, and highlighted text of title 
+	corresponding to negative sentiment(red).
+    13. FIG13_highlight_trib-possent.png: Visualizes sentiment polarity 
+	of Chicago Tribune article titles by yielding article title 
+	number, polarity score, and highlighted text of title 
+	correpsonding to positive sentiment (green).
+    14. FIG14_bar_def-polarity.png: Barplot graphing sentiment/polarity 
+	score of Defender (Chicago Defender and Daily Defender) article 
+	titles.
+    15. FIG15_highlight_defender-posneg.png: Visualizes sentiment 
+	polarity of random sampling of Defender (both Chicago Defender 
+	and Daily Defender) article titles by yielding article title 
+	number, polarity score, and highlighted text of title 
+	corresponding to sentiment (pos- green, neg-red, neutral-none). 
+
+
+Project Significance
+
+In the 1940s and '50s, the primary housing option for black newcomers to 
+Chicago, Illinois from the South were kitchenette apartments. Far from 
+the trendy, modern "efficiency" kitchenettes of their white 
+counterparts, kitchenette apartments for black migrants to the city were 
+overcrowded, dilapidated, and overpriced. What may have once been a 
+multi-room apartment for one family was chopped into several one- or 
+two-room kitchenette apartments, separated by beaverboard and rented out 
+to families at a higher rate than the original whole apartment was 
+rented for. Due to redlining practices and housing segregation, black 
+residents often had no choice but to dwell in these denigrated domestic 
+spaces. 
+
+This project engages with historical newspapers to assess the discussion 
+in print media of kitchenette apartments in Chicago and other major U.S. 
+cities during the mid-twentieth century. While the project represented 
+here begins an analysis of article titles from a sampling of newspaper 
+articles of the period, my larger aim is to analyze the actual text of 
+the articles, as titles provide very limited insight into the discussion 
+of kitchenettes appearing in the newspapers. To achieve this, I will 
+need to convert the image PDFs of the articles to searchable-text PDFs 
+and use similar code as was generated for the existing project.
+
+
+
+More Information
+
+The SentimentR package was (and will be) indispensable to this project, 
+although some aspects of the package are a bit buggy. Information on the 
+package can be found here: 
+https://github.com/trinker/sentimentr#installation
+
+Contact Amani: acm4 at berkeley.edu
