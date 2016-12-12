@@ -23,7 +23,8 @@ The ProQuest search was performed with the following search parameters:
 	"Letter to the Editor" OR "News"
   - Yields: 1425 results
   - Sorted by: Relevance (default)
- First 500 results selected to export for analysis.
+ First 500 results (each with 21 variables) selected to export for 
+ analysis.
 
 
 Dependencies:
