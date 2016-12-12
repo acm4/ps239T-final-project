@@ -1,9 +1,59 @@
-Short Description:
+##Description:
+This project analyzes data from a targeted search in the ProQuest 
+Historical Newspapers database. The project performs analyses to 
+ascertain newspaper article frequency, term frequency, change over 
+time, and article sentiment/polarity.
+
+#Note on Data Collection
+The ProQuest search was performed with the following search parameters:
+  - search term: kitchenette
+   - filter by:
+     - Publication Date: 1940-1959
+     - Publication: "Chicago Daily Tribune (1923-1963)" OR 
+	"New York Times (1923-Current file)" OR 
+	"Los Angeles Times (1923-Current File)" OR 
+	"The Chicago Defender (National edition)(1921-1967)" OR 
+	"The Washington Post (1923-1954)" OR 
+	"Daily Defender (Daily Edition)(1956-1960)" OR 
+	"The Washington Post and Times Herald (1954-1959)"
+     - Document Type: "Feature" OR "Front Page/Cover Story" OR
+	"Letter to the Editor" OR "News"
+  - Yields: 1425 results
+  - Sorted by: Relevance (default)
+ First 500 results selected to export for analysis.
+
+##Dependencies:
+  1. RStudio, Version 0.99.903
 
 
-Dependencies:
-1. RStudio, Version 0.99.903
+##Files:
 
+ #Data
+    1. kitchenette1_proquest.csv: ProQuest dataset (results 1-100)
+    2. kitchenette2_proquest.csv: ProQuest dataset (results 101-200)
+    3. ktichenette3_proquest.csv: ProQuest dataset (results 201-300)
+    4. kitchenette4_proquest.csv: ProQuest dataset (results 301-400)
+    5. kitchenette5_proquest.csv: ProQuest dataset (results 401-500)
+    6. analysis-dataset-kitchenette_proquest.csv: The final Analysis 
+	Dataset derived from the raw data above. It includes unique 
+	observations for the following variables:
+	  - Title: Article title
+	  - Abstract: Article abstract
+	  - Authors: Author(s) of article
+	  - placeofPublication: City where newspaper is published
+	  - pubdate: Date of article publication (month, day, year)
+	  - pubtitle: Newspaper title
+	  - year: Year of article publication
 
-Files:
+  #Code
+    1. 01_load-clean-data.R: Loads, merges, and cleans data in 5 raw 
+	ProQuest datasets into Analysis Dataset.
+    2. 02_analysis-national.R: Conducts analysis of all data 
+	(representing 4 major U.S. cities--NY, LA, DC, Chicago), the 
+	results of which appear in the Results directory.
+    3. 03_analysis-chicago.R: Conducts analysis of data from Chicago 
+	newspapers only, the results of which appear in the Results 
+	directory.
 
+  #Results
+    1. 
